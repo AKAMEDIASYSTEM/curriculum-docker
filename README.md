@@ -1,4 +1,4 @@
-tuned-resonator
+self-contained curriculum (test)
 ===============
 
-mdns beacon updated with various experimental sources
+ec2-based curriculum server test
