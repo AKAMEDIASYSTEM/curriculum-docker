@@ -9,7 +9,7 @@ from ResponseObject import ResponseObject
 import beanstalkc
 
 class SubmitHandler(BaseHandler):
-    """json submittion to local curriculum store"""
+    """json submission to local curriculum store"""
     beanstalk = beanstalkc.Connection(host='localhost', port=14711)
 
     def post(self):
@@ -17,7 +17,7 @@ class SubmitHandler(BaseHandler):
             db = self.settings['db']
             url = self.get_argument('url')
             groupID = self.get_argument('groupID')
-            print 'hit the SubmitHandler endpoint with url=', url
+            print 'hit the insular SubmitHandler endpoint with url=', url
             # TODO: this doesn't take groups into account! and so is terribly broken.
             # a quick fix is to move all this over to mongo
             # not sure about wisdom of that
