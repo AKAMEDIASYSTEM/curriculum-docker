@@ -28,6 +28,7 @@ while True:
     print 'starting worker outer loop'
     job = beanstalk.reserve() # this is blocking, waits till there's something on the stalk
     url = URL(job.body)
+    print url
     pipe = r_url.pipeline(transaction=True)
     redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute() # should I be updating the TTL? Experience-design question more than anything
     print redis_response
