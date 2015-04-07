@@ -21,6 +21,8 @@ __/worker.py__ - this takes jobs form Beanstalk, checks Redis.1 to see if it sho
 
 __startDB.py__ - this shoves credentials from groups.py (NOT in this repo, full o' secrets) into Redis.2
 
+__beanstalk.sh__ - must be run on boot, before __startDB.py__ and __server/server.py__
+
 __/server/server.py__ - this is the main tornado instance.
 * ApiHandler.py - services API queries. 
 * BaseHandler.py - just a superclass contining the isAuth() function
