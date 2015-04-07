@@ -5,12 +5,12 @@ ec2-based curriculum server test
 
 Stack:
 
-Nginx - listens to the world on port 80, load balances (but not much for us, since we only have one tornado instance running)
+_Nginx_ - listens to the world on port 80, load balances (but not much for us, since we only have one tornado instance running)
 /etc/nginx/nginx.conf - this holds the mapping from "listen on" to "send traffic to X servers"
 
-Upstart - systemd-like "make sure main apps are running and if not, restart them". Need to document more config stuff for this.
+_Upstart_ - systemd-like "make sure main apps are running and if not, restart them". Need to document more config stuff for this.
 
-Redis - the local curriculum implementation uses Redis for storing chunks of language. Not sure how to port over timestamps (for date-range API queries - necessary?) or do authentication (separate DB seems easiest)
+_Redis_ - the local curriculum implementation uses Redis for storing chunks of language. Not sure how to port over timestamps (for date-range API queries - necessary?) or do authentication (separate DB seems easiest)
 * redis "0" - language fragments, probably simple K:V or List. TTL should be 7 days or so
 * redis "1" - list of URLS we have processed quite recently - TTL here should be ~1 hour. We check against this before re-fetching the page to do any NLP+chunking
 * redis "2" - authentication DB? Populated at boot form a static groups.py-like file?
