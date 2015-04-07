@@ -13,6 +13,7 @@ class SubmitHandler(BaseHandler):
     beanstalk = beanstalkc.Connection(host='localhost', port=14711)
 
     def post(self):
+        print 'inside curriculum-insular SubmitHandler'
         if self.isAuth():
             db = self.settings['db']
             url = self.get_argument('url')
