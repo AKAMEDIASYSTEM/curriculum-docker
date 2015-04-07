@@ -25,12 +25,12 @@ while True:
     # resolving the url means, fetch it in pattern and check the mimetype to ensure we only parse text -containing stuff
     # then use pattern to get chunks and noun phrases and shove them in another redis store
     # (where key is the phrase, and value is just INCR?)
-
+    print 'starting worker outer loop'
     job = beanstalk.reserve() # this is blocking, waits till there's something on the stalk
     url = URL(job.body)
     pipe = r_url.pipeline(transaction=True)
     redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute() # should I be updating the TTL? Experience-design question more than anything
-    # print redis_response
+    print redis_response
 
     if(redis_response[0] < 2):
         print 'new url, we think', url
