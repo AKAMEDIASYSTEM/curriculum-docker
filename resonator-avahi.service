@@ -1,9 +1,0 @@
-<?xml version="1.0" standalone="no"?><!--*-nxml-*--><!DOCTYPE service-group SYSTEM "avahi-service.dtd"><service-group>
-  <name replace-wildcards="yes">http://donald.lan</name>
-  <service>
-    <host-name>donald.lan</host-name>
-    <type>_http._tcp</type>
-    <port>80</port>
-    <txt-record>path='?t=10'</txt-record>
-  </service>
-</service-group>
