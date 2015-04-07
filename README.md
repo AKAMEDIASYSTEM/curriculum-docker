@@ -15,15 +15,17 @@ __Redis__ - the local curriculum implementation uses Redis for storing chunks of
 * redis "1" - list of URLS we have processed quite recently - TTL here should be ~1 hour. We check against this before re-fetching the page to do any NLP+chunking
 * redis "2" - authentication DB? Populated at boot form a static groups.py-like file?
 
-Beanstalk - handles the queue of URLS-to-analyze from SubmitHandler
+__Beanstalk__ - handles the queue of URLS-to-analyze from SubmitHandler
 
-/worker.py - this takes jobs form Beanstalk, checks Redis.1 to see if it should be resolved, and resolves it into chunks that are loaded into Redis.0 (HEY, how are we going to keep track of groupIDs here?)
+__/worker.py__ - this takes jobs form Beanstalk, checks Redis.1 to see if it should be resolved, and resolves it into chunks that are loaded into Redis.0 (HEY, how are we going to keep track of groupIDs here?)
 
-/server/server.py - this is the main tornado instance.
+__startDB.py__ - this shoves credentials from groups.py (NOT in this repo, full o' secrets) into Redis.2
+
+__/server/server.py__ - this is the main tornado instance.
 * ApiHandler.py - services API queries. 
 * BaseHandler.py - just a superclass contining the isAuth() function
 * BrowserHandler.py - services web queries, currently only ZEN mode (this would be the prototype for other views)
 * SubmitHandler.py - accepts URLs from Chrome extension. Note we no longer accept SubmitAnon stuff; need to update Chrome client
 
 
-/chrome - this holds the Chrome extension that submits HTTP URLs to the server
+__/chrome__ - this holds the Chrome extension that submits HTTP URLs to the server
