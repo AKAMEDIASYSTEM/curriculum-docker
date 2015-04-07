@@ -32,14 +32,15 @@ class BaseHandler(tornado.web.RequestHandler):
     
     def isAuth(self):
         # logging.info('entering isAuth function in BaseHandler')
-        db = self.settings['auth'] # TODO change this to redis lookup?
-        isAuth = db.users.find(
-            {'$and':
-                [
-                    {'groupID' : self.groupID},
-                    {'token' : self.token}
-                    ]
-            }).count()
+        # db = self.settings['auth'] # TODO change this to redis lookup?
+        # isAuth = db.users.find(
+        #     {'$and':
+        #         [
+        #             {'groupID' : self.groupID},
+        #             {'token' : self.token}
+        #             ]
+        #     }).count()
         # logging.info('found %s matches for isAuth'%isAuth)
         # return isAuth
+        print 'hit isAuth, which is disabled rn'
         return True # for testing, duh
