@@ -1,0 +1,32 @@
+/*
+ * Copyright (c) 2014 nytlabs, nfeehan.
+ */
+{
+  "name": "Curriculum",
+  "version": "2.1",
+  "manifest_version": 2,
+  "description": "This extension aggregates the topics and domain names browsed by people in a group; a separate client will create a real-time topic display from this information",
+  "content_scripts" : [
+    {
+      "matches" : [
+        "http://*/*",
+        "https://*/*"
+        ],
+      "js" : [
+        "js/jquery.js",
+        "js/curriculum.js"
+        ],
+      "run_at" : "document_end",
+      "all_frames" : false
+    }
+  ],
+  "permissions": [
+    "debugger",    
+    "tabs",
+    "http://*/*"
+  ],
+  "background" : {
+    "scripts": ["js/jquery.js","js/background.js"]
+  },
+  "options_page" : "options.html"
+}
