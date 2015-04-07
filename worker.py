@@ -80,4 +80,3 @@ while True:
     randy = r_text.randomkey()
     print randy.upper()
     print 'that key has this much time to live', r_text.ttl(randy)
-# output.close()
