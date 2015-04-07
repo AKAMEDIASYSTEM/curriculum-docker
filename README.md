@@ -17,6 +17,8 @@ Redis - the local curriculum implementation uses Redis for storing chunks of lan
 
 Beanstalk - handles the queue of URLS-to-analyze from SubmitHandler
 
+/worker.py - this takes jobs form Beanstalk, checks Redis.1 to see if it should be resolved, and resolves it into chunks that are loaded into Redis.0 (HEY, how are we going to keep track of groupIDs here?)
+
 /server/server.py - this is the main tornado instance.
 * ApiHandler.py - services API queries. 
 * BaseHandler.py - just a superclass contining the isAuth() function
