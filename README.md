@@ -18,10 +18,10 @@ Redis - the local curriculum implementation uses Redis for storing chunks of lan
 Beanstalk - handles the queue of URLS-to-analyze from SubmitHandler
 
 /server/server.py - this is the main tornado instance.
-    ApiHandler.py - services API queries. 
-    BaseHandler.py - just a superclass contining the isAuth() function
-    BrowserHandler.py - services web queries, currently only ZEN mode (this would be the prototype for other views)
-    SubmitHandler.py - accepts URLs from Chrome extension. Note we no longer accept SubmitAnon stuff; need to update Chrome client
+    * ApiHandler.py - services API queries. 
+    * BaseHandler.py - just a superclass contining the isAuth() function
+    * BrowserHandler.py - services web queries, currently only ZEN mode (this would be the prototype for other views)
+    * SubmitHandler.py - accepts URLs from Chrome extension. Note we no longer accept SubmitAnon stuff; need to update Chrome client
 
 
 /chrome - this holds the Chrome extension that submits HTTP URLs to the server
