@@ -11,7 +11,7 @@ import tornado.options
 import tornado.template
 import ResponseObject
 import traceback
-import redis
+import pymongo
 import logging
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -35,23 +35,14 @@ class BaseHandler(tornado.web.RequestHandler):
             print self.response.response
     
     def isAuth(self):
-        logging.info('entering isAuth function in BaseHandler')
-        r_auth = redis.StrictRedis(host='localhost', port=6379, db=2)
-        result = r_auth.get(self.groupID)
-        print result
-        if result is not None and result==self.token:
-            return True
-        else:
-            return False
-        print "we shouldn't be here"
-        return False
-        # db = self.settings['auth'] # TODO change this to redis lookup?
-        # isAuth = db.users.find(
-        #     {'$and':
-        #         [
-        #             {'groupID' : self.groupID},
-        #             {'token' : self.token}
-        #             ]
-        #     }).count()
-        # logging.info('found %s matches for isAuth'%isAuth)
-        # return isAuth
+        # logging.info('entering isAuth function in BaseHandler')
+        db = self.settings['db']
+        isAuth = db.users.find(
+            {'$and':
+                [
+                    {'groupID' : self.groupID},
+                    {'token' : self.token}
+                    ]
+            }).count()
+        logging.info('found %s matches for isAuth'%isAuth)
+        return isAuth

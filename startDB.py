@@ -18,18 +18,55 @@ import logging
 import os
 import sys
 import time
+import pymongo
+from pymongo import MongoClient
 import tornado
 from tornado import gen
 import tornado.ioloop
 import tornado.web
 import tornado.options
+import tornado.template
+from bson.objectid import ObjectId
+from bson import json_util
 import groups
-import redis
+
+TTL_text = 604800 # 7 days
+TTL_url = 600 # ten minutes
+
+def create_keywords_collection(db):
+    db.create_collection('keywords')
+    db.keywords.ensure_index('latest',expireAfterSeconds=TTL_text)
+    db.keywords.ensure_index('keyword')
+    logging.info('Created TTL-enabled collection "keywords" in database "curriculum"')
+
+def create_users_collection(db):
+    db.create_collection('users')
+    db.users.ensure_index('groupID')
+    logging.info('Created UNcapped collection "users" in database "curriculum"')
+    db.users.insert(groups.grouplist) # bulk insert FTW
+    logging.info('Added all groups.py to db.users DB')
+
+def create_pages_collection(db):
+    db.create_collection('pages')
+    db.pages.ensure_index('timestamp',expireAfterSeconds=TTL_url)
+    db.pages.ensure_index('url')
+    # db.ensure_index({'url':1},{expireAfterSeconds:TTL_url})
+    logging.info('Created TTL-enabled collection "pages" in database "curriculum"')
+
 
 if __name__ == '__main__':
-    r_auth = redis.StrictRedis(host='localhost', port=6379, db=2)
-    for group in groups.grouplist:
-        pipe_text = r_auth.pipeline(transaction=True)
-        r_response = pipe_text.set(group['groupID'], group['token']).execute()
-        print r_response
-    logging.info("Finished setting up Redis DBs")
+    client = MongoClient(tz_aware=True)
+    curr_db = client.curriculum
+    try:
+        create_keywords_collection(curr_db)
+    except pymongo.errors.CollectionInvalid:
+        pass
+    try:
+        create_pages_collection(curr_db)
+    except pymongo.errors.CollectionInvalid:
+        pass
+    try:
+        create_users_collection(curr_db)
+    except pymongo.errors.CollectionInvalid:
+        pass
+    logging.info("Finished setting up Mongo DBs")
