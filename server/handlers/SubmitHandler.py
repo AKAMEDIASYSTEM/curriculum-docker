@@ -49,7 +49,7 @@ class SubmitHandler(BaseHandler):
             d = (groupID,str(url))
             combo = '|'.join(d)
             print combo
-            print type(combo)
+            combo = str(combo)
             beanstalk.put(combo)
             # maybe have a beanstalk queue for every groupID???
             # is that Smart?
