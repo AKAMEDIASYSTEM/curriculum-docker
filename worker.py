@@ -55,8 +55,9 @@ while True:
                 for sentence in parsed:
                     for chk in sentence.chunks:
                         if chk.type!='NP':
-                            print chk.type
+                            print chk.type, chk.string
                     # only noun phrases for now but let's pick some good other ones next week
+                    # seeing ADJP, ADVP, PP and VP mostly tho NP are predominant
                     gen = (the_chunk for the_chunk in sentence.chunks if the_chunk.type=='NP')
                     for chunk in gen:
                     # if chunk.type=='NP' for chunk in sentence.chunks:
