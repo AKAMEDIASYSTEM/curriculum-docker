@@ -11,6 +11,7 @@ import tornado.options
 import tornado.template
 import ResponseObject
 import traceback
+import redis
 
 class BaseHandler(tornado.web.RequestHandler):
 
@@ -31,7 +32,15 @@ class BaseHandler(tornado.web.RequestHandler):
             print self.response.response
     
     def isAuth(self):
-        # logging.info('entering isAuth function in BaseHandler')
+        logging.info('entering isAuth function in BaseHandler')
+        r_auth = redis.StrictRedis(host='localhost', port=6379, db=2)
+        result = r_auth.get(self.groupID)
+        if result is not None and result==self.token:
+            return False
+        else:
+            return True
+        print "we shouldn't be here"
+        return False
         # db = self.settings['auth'] # TODO change this to redis lookup?
         # isAuth = db.users.find(
         #     {'$and':
@@ -42,5 +51,3 @@ class BaseHandler(tornado.web.RequestHandler):
         #     }).count()
         # logging.info('found %s matches for isAuth'%isAuth)
         # return isAuth
-        print 'hit isAuth, which is disabled rn'
-        return True # for testing, duh
