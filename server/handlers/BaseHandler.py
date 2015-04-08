@@ -21,6 +21,8 @@ class BaseHandler(tornado.web.RequestHandler):
         try:
             tornado.web.RequestHandler.__init__(self,  *args, **kwargs)
             self.set_header("Access-Control-Allow-Origin", "*")
+            self.token = self.get_argument('token')
+            self.groupID = self.get_argument('groupID')
             self.response = ResponseObject.ResponseObject()
         except Exception as reason:
             print reason, traceback.format_exc()
