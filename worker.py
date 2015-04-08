@@ -27,7 +27,9 @@ while True:
     # (where key is the phrase, and value is just INCR?)
     print 'starting worker outer loop'
     job = beanstalk.reserve() # this is blocking, waits till there's something on the stalk
-    url = URL(job.body)
+    pay = job.body.split('|')
+    groupID = pay[0]
+    url = URL(pay[-1])
     print url
     pipe = r_url.pipeline(transaction=True)
     redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute() # should I be updating the TTL? Experience-design question more than anything

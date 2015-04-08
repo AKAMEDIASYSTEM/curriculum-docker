@@ -23,6 +23,7 @@ class SubmitHandler(BaseHandler):
             url = self.get_argument('url')
             groupID = self.get_argument('groupID')
             timestamp = datetime.datetime.utcnow()
+            print 'hit the insular SubmitHandler endpoint with url=', url
             # search pages collection for this url and groupID combo
             # if present already, do nothing (pages coll has TTL of 10 mins)
             # if absent, add url to pages AND do lang processing
@@ -33,21 +34,14 @@ class SubmitHandler(BaseHandler):
             if isThere < 1:
                 # populate Pages collection
                 print 'adding the url because we havent seen it before'
+                # hey we dont need timestamps in this anymore, do we?
+                # take them out if you decide TTL is sufficient?
                 db.pages.update(
                     {'url':url, 'groupID':groupID},
                     {'$push' : {'timestamp':timestamp}, '$set' : {'latest':timestamp}},
                     upsert=True
                     )
-
-
-            # beanstalk.use(str(groupID)) # is the str() necessary?
-            print 'hit the insular SubmitHandler endpoint with url=', url
-            # print type(url)
-            # TODO: this doesn't take groups into account! and so is terribly broken.
-            # a quick fix is to move all this over to mongo
-            # not sure about wisdom of that
-            d = (groupID,str(url))
-            combo = '|'.join(d)
+            combo = '|'.join((groupID,str(url)))
             print combo
             combo = str(combo)
             beanstalk.put(combo)
