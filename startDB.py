@@ -24,6 +24,7 @@ import tornado.ioloop
 import tornado.web
 import tornado.options
 import groups
+import redis
 
 if __name__ == '__main__':
     r_auth = redis.StrictRedis(host='localhost', port=6379, db=2)
