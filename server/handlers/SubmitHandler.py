@@ -10,10 +10,11 @@ import beanstalkc
 
 class SubmitHandler(BaseHandler):
     """json submission to local curriculum store"""
-    def __init__(self, *args, **kwargs):
-        beanstalk = beanstalkc.Connection(host='localhost', port=14711)
+    # def __init__(self, *args, **kwargs):
+    #     beanstalk = beanstalkc.Connection(host='localhost', port=14711)
 
     def post(self):
+        beanstalk = beanstalkc.Connection(host='localhost', port=14711)
         print 'inside curriculum-insular SubmitHandler'
         if self.isAuth():
             print 'isAuth returned True!'
