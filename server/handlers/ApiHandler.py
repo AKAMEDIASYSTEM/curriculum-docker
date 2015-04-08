@@ -7,6 +7,7 @@ import tornado
 from handlers.BaseHandler import BaseHandler
 from ResponseObject import ResponseObject
 import datetime
+import random
 
 class ApiHandler(BaseHandler):
     """json access to local curriculum store"""
