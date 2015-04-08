@@ -8,7 +8,7 @@ from pymongo import MongoClient
 from handlers.BrowserHandler import BrowserHandler
 from handlers.ApiHandler import ApiHandler
 from handlers.SubmitHandler import SubmitHandler
-import redis
+import datetime
 
 
 
