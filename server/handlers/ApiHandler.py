@@ -15,8 +15,7 @@ class ApiHandler(BaseHandler):
         if self.isAuth():
             n = self.get_argument('n',3) # three hours, should be global EXPIRE_IN from worker.py
             earliest = datetime.datetime.utcnow() - datetime.timedelta(days=1)
-            url = self.get_argument('url') # these have to be present, isAuth would have failed otherwise
-            groupID = self.get_argument('groupID')
+            groupID = self.get_argument('groupID') # these have to be present, isAuth would have failed otherwise
             db = self.settings['db']
             print 'hit the ApiHandler endpoint with n=', n
             keywords = []
