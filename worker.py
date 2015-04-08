@@ -59,7 +59,7 @@ while True:
                     gen = (the_chunk for the_chunk in sentence.chunks if the_chunk.type=='NP')
                     for chunk in gen:
                     # if chunk.type=='NP' for chunk in sentence.chunks:
-                        print chunk.type, [(w.string, w.type) for w in chunk.words]
+                        # print chunk.type, [(w.string, w.type) for w in chunk.words]
                         # print chunk.string
                         pipe_text = r_text.pipeline(transaction=True)
                         r_response = pipe_text.set(chunk.string, chunk.type).expire(chunk.string, EXPIRE_IN).execute()
