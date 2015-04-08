@@ -4,6 +4,7 @@
 
 import tornado.ioloop
 import tornado.web
+from pymongo import MongoClient
 from handlers.BrowserHandler import BrowserHandler
 from handlers.ApiHandler import ApiHandler
 from handlers.SubmitHandler import SubmitHandler
