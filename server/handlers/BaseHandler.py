@@ -38,6 +38,7 @@ class BaseHandler(tornado.web.RequestHandler):
         logging.info('entering isAuth function in BaseHandler')
         r_auth = redis.StrictRedis(host='localhost', port=6379, db=2)
         result = r_auth.get(self.groupID)
+        logging.debug(result)
         if result is not None and result==self.token:
             return False
         else:
