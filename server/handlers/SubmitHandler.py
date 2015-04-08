@@ -15,6 +15,7 @@ class SubmitHandler(BaseHandler):
     def post(self):
         print 'inside curriculum-insular SubmitHandler'
         if self.isAuth():
+            print 'isAuth returned True!'
             db = self.settings['db']
             url = self.get_argument('url')
             groupID = self.get_argument('groupID')
@@ -25,6 +26,9 @@ class SubmitHandler(BaseHandler):
             beanstalk.put(url)
             # maybe have a beanstalk queue for every groupID???
             # is that Smart?
-        self.response = ResponseObject('200','Success')
+            self.response = ResponseObject('200','Success')
+        else:
+            print print 'isAuth returned False'
+            self.response = ResponseObject('500','Error - authentication failed')
         self.write_response()
         self.finish()
