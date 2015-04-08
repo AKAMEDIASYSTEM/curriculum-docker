@@ -6,29 +6,32 @@ import logging
 import tornado
 from handlers.BaseHandler import BaseHandler
 from ResponseObject import ResponseObject
+import datetime
 
 class ApiHandler(BaseHandler):
     """json access to local curriculum store"""
 
     def get(self):
-        try:
-            n = self.get_argument('n')
-        except:
-            n = 3 # three hours, should be global EXPIRE_IN from worker.py
-        db = self.settings['db']
-        print 'hit the BrowserHandler endpoint with n=', n
-        keywords = []
-        found = 0
-        while found < int(n):
-            k = db.randomkey()
-            if k is not None:
+        if self.isAuth():
+            n = self.get_argument('n',3) # three hours, should be global EXPIRE_IN from worker.py
+            earliest = datetime.datetime.utcnow() - datetime.timedelta(days=1)
+            url = self.get_argument('url') # these have to be present, isAuth would have failed otherwise
+            groupID = self.get_argument('groupID')
+            db = self.settings['db']
+            print 'hit the ApiHandler endpoint with n=', n
+            keywords = []
+            found = 0
+            r = db.keywords.find({'latest':{'$gte':earliest},'groupID':groupID},{'keyword':1,'_id':0})
+            results = [word['keyword'] for word in r]
+            while found < 4:
+                k = random.choice(results)
                 if k not in keywords:
                     keywords.append(k)
                     found += 1
-            else:
-                keywords = ['no recent results']
-        d = {'title':'tuned-resonator curriculum-barnacle test',
-        'noun_phrase':keywords}
-        self.response = ResponseObject('200','Success', d)
+            d = {'title':'curriculum-insular test',
+            'keywords':keywords}
+            self.response = ResponseObject('200','Success', d)
+        else:
+            self.response = ResponseObject('500','Authentication failed')
         self.write_response()
         self.finish()
