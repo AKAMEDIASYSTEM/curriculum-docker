@@ -26,13 +26,9 @@ class ApiHandler(BaseHandler):
                 r = db.keywords.find({'latest':{'$gte':earliest},'groupID':groupID},{'keyword':1,'_id':0})
             else:
                 # insecure! we should have an enum or whitelist of types
-                # r = db.keywords.find({'latest':{'$gte':earliest},'groupID':groupID, 'type':ty},{'keyword':1,'type':1,'_id':0})
-                r = db.keywords.find({'latest':{'$gte':earliest},'groupID':groupID, 'type':ty})
-            for i in r:
-                print i
+                r = db.keywords.find({'latest':{'$gte':earliest},'groupID':groupID, 'type':ty},{'keyword':1,'type':1,'_id':0})
+                # r = db.keywords.find({'latest':{'$gte':earliest},'groupID':groupID, 'type':ty}) # this was to test query
             results = [word['keyword'] for word in r]
-            types  = [word['type'] for word in r]
-            print types
             while found < int(n):
                 k = random.choice(results)
                 if k not in keywords:
