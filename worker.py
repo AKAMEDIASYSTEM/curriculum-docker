@@ -7,13 +7,13 @@ from pattern.web import URL, plaintext, URLError, MIMETYPE_WEBPAGE, MIMETYPE_PLA
 from pattern.en import parse as text_parse # to keep distinct from urllib's parse
 from pattern.en import parsetree
 import sys
-import redis
+from pymongo import MongoClient
 
 EXPIRE_IN = 10800 # this is 3 hours in seconds
 
 beanstalk = beanstalkc.Connection(host='localhost', port=14711)
-r_url = redis.StrictRedis(host='localhost', port=6379, db=0)
-r_text = redis.StrictRedis(host='localhost', port=6379, db=1)
+client = MongoClient(tz_aware=True)
+db = client.curriculum
 # c=0 # debug counter
 # output = open('test_output_redis.txt','w') # deprecated, was for debug
 
