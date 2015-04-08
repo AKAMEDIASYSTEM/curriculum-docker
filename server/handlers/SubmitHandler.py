@@ -28,7 +28,7 @@ class SubmitHandler(BaseHandler):
             # is that Smart?
             self.response = ResponseObject('200','Success')
         else:
-            print print 'isAuth returned False'
+            print 'isAuth returned False'
             self.response = ResponseObject('500','Error - authentication failed')
         self.write_response()
         self.finish()
