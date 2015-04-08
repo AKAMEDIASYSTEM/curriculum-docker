@@ -13,8 +13,8 @@ from tornado.template import Loader
 
 class BrowserHandler(BaseHandler):
     """HTML display of Keywords browsed in the last day"""
-    def __init__(self, *args, **kwargs):
-        BaseHandler.__init__(self,  *args, **kwargs)  
+    # def __init__(self, *args, **kwargs):
+    #     BaseHandler.__init__(self,  *args, **kwargs)  
 
     def get(self):
         logging.debug('hit the BrowserHandler endpoint')
@@ -38,7 +38,7 @@ class BrowserHandler(BaseHandler):
                     keywords.append(k)
                     found += 1
 
-            self.write(loader.load("keyword-single.html").generate(keywords=keywords))
+            self.write(loader.load("zen.html").generate(keywords=keywords))
         else:
             # _groupID = self.get_argument('groupID')
             # _token = self.get_argument('token')
