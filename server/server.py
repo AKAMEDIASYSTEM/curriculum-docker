@@ -11,8 +11,10 @@ import redis
 
 
 
-db = redis.StrictRedis(host='localhost', port=6379, db=1)
-auth = redis.StrictRedis(host='localhost', port=6379, db=2)
+# db = redis.StrictRedis(host='localhost', port=6379, db=1)
+# auth = redis.StrictRedis(host='localhost', port=6379, db=2)
+client = MongoClient(tz_aware=True)
+db = client.curriculum
 # settings = {'debug':True}
 # settings = {'debug':True, 'auth':auth} # not sure this will work, strike this first if stuff doesn't work
 settings = {'debug':True, 'auth':True}
