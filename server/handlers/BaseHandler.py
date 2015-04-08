@@ -40,9 +40,9 @@ class BaseHandler(tornado.web.RequestHandler):
         result = r_auth.get(self.groupID)
         print result
         if result is not None and result==self.token:
-            return False
-        else:
             return True
+        else:
+            return False
         print "we shouldn't be here"
         return False
         # db = self.settings['auth'] # TODO change this to redis lookup?
