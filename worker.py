@@ -50,7 +50,7 @@ while True:
                 for chunk in sentence.chunks:
                     d = db.keywords.update(
                             {'keyword':chunk.string, 'type':chunk.type, 'groupID':groupID},
-                            {'$push' : {'timestamp':timestamp, 'url':url}, '$set' : {'latest':timestamp}},
+                            {'$push' : {'timestamp':timestamp, 'url':url.string}, '$set' : {'latest':timestamp}},
                             upsert=True
                             )
                     print d
