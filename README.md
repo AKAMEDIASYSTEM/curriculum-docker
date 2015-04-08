@@ -3,6 +3,9 @@ self-contained curriculum (test)
 
 ec2-based curriculum server test
 
+sudo apt-get install git redis-server libxml2-dev libxslt-dev beanstalkd build-essential python-dev python-pip python-imaging -y
+sudo pip install pattern tornado --upgrade
+
 Stack:
 
 __Nginx__ - listens to the world on port 80, load balances (but not much for us, since we only have one tornado instance running)
