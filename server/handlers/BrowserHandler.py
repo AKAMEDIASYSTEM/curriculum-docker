@@ -28,7 +28,7 @@ class BrowserHandler(BaseHandler):
             logging.debug('groupID is %s' % groupID)
             r = db.keywords.find({'latest':{'$gte':earliest},'groupID':groupID},{'keyword':1,'_id':0})
             d = [word['keyword'] for word in r]
-            loader = tornado.template.Loader('../templates')
+            loader = tornado.template.Loader('../curriculum-insular/templates')
             
             keywords = []
             found = 0
@@ -38,7 +38,7 @@ class BrowserHandler(BaseHandler):
                     keywords.append(k)
                     found += 1
 
-            self.write(loader.load("zen.html").generate(keywords=keywords))
+            self.write(loader.load('zen.html').generate(keywords=keywords))
         else:
             # _groupID = self.get_argument('groupID')
             # _token = self.get_argument('token')
