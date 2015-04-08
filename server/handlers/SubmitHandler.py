@@ -22,6 +22,7 @@ class SubmitHandler(BaseHandler):
             url = self.get_argument('url')
             groupID = self.get_argument('groupID')
             print 'hit the insular SubmitHandler endpoint with url=', url
+            print type(url)
             # TODO: this doesn't take groups into account! and so is terribly broken.
             # a quick fix is to move all this over to mongo
             # not sure about wisdom of that
