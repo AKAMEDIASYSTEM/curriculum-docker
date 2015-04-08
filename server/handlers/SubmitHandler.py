@@ -46,7 +46,9 @@ class SubmitHandler(BaseHandler):
             # TODO: this doesn't take groups into account! and so is terribly broken.
             # a quick fix is to move all this over to mongo
             # not sure about wisdom of that
-            # beanstalk.put(str(url))
+            combo = '|'.join(groupID,url)
+            print combo
+            beanstalk.put(combo)
             # maybe have a beanstalk queue for every groupID???
             # is that Smart?
             self.response = ResponseObject('200','Success')
