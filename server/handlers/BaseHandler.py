@@ -12,6 +12,7 @@ import tornado.template
 import ResponseObject
 import traceback
 import redis
+import logging
 
 class BaseHandler(tornado.web.RequestHandler):
 
