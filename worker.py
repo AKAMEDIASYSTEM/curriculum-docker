@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# AKA resonator local curriculum resolver/worker
+# AKA tuned-resonator curriculum-insular resolver/worker
 
 import beanstalkc
 from pattern.web import URL, plaintext, URLError, MIMETYPE_WEBPAGE, MIMETYPE_PLAINTEXT, HTTPError
@@ -8,15 +8,11 @@ from pattern.en import parse as text_parse # to keep distinct from urllib's pars
 from pattern.en import parsetree
 import sys
 from pymongo import MongoClient
-
-EXPIRE_IN = 10800 # this is 3 hours in seconds
+import datetime
 
 beanstalk = beanstalkc.Connection(host='localhost', port=14711)
 client = MongoClient(tz_aware=True)
 db = client.curriculum
-# c=0 # debug counter
-# output = open('test_output_redis.txt','w') # deprecated, was for debug
-
 
 while True:
     # take URL and groupID
@@ -28,6 +24,7 @@ while True:
     groupID = pay[0]
     url = URL(pay[-1])
     print 'new url, we think', url
+    timestamp = datetime.datetime.utcnow()
     try:
         s = url.download(cached=True)
         print url.mimetype
