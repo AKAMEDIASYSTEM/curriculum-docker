@@ -53,6 +53,8 @@ while True:
                 # parsed = text_parse(s, chunks = True)
                 parsed = parsetree(s, chunks=True)
                 for sentence in parsed:
+                    for chk in sentence.chunks:
+                        print chk.type
                     # only noun phrases for now but let's pick some good other ones next week
                     gen = (the_chunk for the_chunk in sentence.chunks if the_chunk.type=='NP')
                     for chunk in gen:
