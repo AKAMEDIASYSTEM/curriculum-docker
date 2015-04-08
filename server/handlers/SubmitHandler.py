@@ -46,7 +46,7 @@ class SubmitHandler(BaseHandler):
             # TODO: this doesn't take groups into account! and so is terribly broken.
             # a quick fix is to move all this over to mongo
             # not sure about wisdom of that
-            d = (groupID,url)
+            d = (groupID,str(url))
             combo = '|'.join(d)
             print combo
             beanstalk.put(combo)
