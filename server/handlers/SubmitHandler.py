@@ -8,11 +8,10 @@ from handlers.BaseHandler import BaseHandler
 from ResponseObject import ResponseObject
 import datetime
 import beanstalkc
+from pymongo import MongoClient
 
 class SubmitHandler(BaseHandler):
-    """json submission to local curriculum store"""
-    # def __init__(self, *args, **kwargs):
-    #     beanstalk = beanstalkc.Connection(host='localhost', port=14711)
+    """json submission to curriculum-insular store"""
 
     def post(self):
         beanstalk = beanstalkc.Connection(host='localhost', port=14711)
