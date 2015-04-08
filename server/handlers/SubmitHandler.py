@@ -42,11 +42,12 @@ class SubmitHandler(BaseHandler):
 
             # beanstalk.use(str(groupID)) # is the str() necessary?
             print 'hit the insular SubmitHandler endpoint with url=', url
-            print type(url)
+            # print type(url)
             # TODO: this doesn't take groups into account! and so is terribly broken.
             # a quick fix is to move all this over to mongo
             # not sure about wisdom of that
-            combo = '|'.join(groupID,url)
+            d = (groupID,url)
+            combo = '|'.join(d)
             print combo
             beanstalk.put(combo)
             # maybe have a beanstalk queue for every groupID???
