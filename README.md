@@ -16,9 +16,9 @@ __Upstart (not yet implemented)__ - systemd-like "make sure main apps are runnin
 __Supervisord__ - copy the two .conf files to /etc/supervisor/init.d/
 
 __MongoDB__ - like its forebear, the new curriculum implementation uses Mongo for storing chunks of language. The DB is called curriculum
-* db.keywords - language fragments, probably simple K:V or List. TTL should be 7 days or so
-* db.pages - list of URLS we have processed quite recently - TTL here should be ~1 hour. We check against this before re-fetching the page to do any NLP+chunking
-* db.users - authentication DB, very static; poplated at boot. It's a DB and not a flatfile so in the future we can perhaps dynamically add groupIDs and tokens
+* __db.keywords__ - language fragments, probably simple K:V or List. TTL should be 7 days or so
+* __db.pages__ - list of URLS we have processed quite recently - TTL here should be ~1 hour. We check against this before re-fetching the page to do any NLP+chunking
+* __db.users__ - authentication DB, very static; poplated at boot. It's a DB and not a flatfile so in the future we can perhaps dynamically add groupIDs and tokens
 
 __Beanstalk__ - handles the queue of URLS-to-analyze from SubmitHandler
 
