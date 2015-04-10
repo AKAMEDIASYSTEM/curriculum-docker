@@ -2,8 +2,6 @@
 # tuned-resonator
 # experiments with google physical-web mdns broadcast
 
-import logging
-import tornado
 from handlers.BaseHandler import BaseHandler
 from ResponseObject import ResponseObject
 import datetime
@@ -16,6 +14,8 @@ class ApiHandler(BaseHandler):
         if self.isAuth():
             n = self.get_argument('n',3) # three hours, should be global EXPIRE_IN from worker.py
             ty = self.get_argument('type','any')
+            # here we could take in a 't' variable for number of minutes into the past? default to 1 day?
+            # or 3 days for weekend-insurance?
             earliest = datetime.datetime.utcnow() - datetime.timedelta(days=1)
             groupID = self.get_argument('groupID') # these have to be present, isAuth would have failed otherwise
             db = self.settings['db']
