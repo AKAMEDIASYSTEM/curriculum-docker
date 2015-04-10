@@ -61,6 +61,7 @@ while True:
         # print 'URLError on ', url
         print url
         print e
+        pass
     # end of if(isThere < 2)
     job.delete()
     print 'job deleted, we think this was all successful - loop over'
