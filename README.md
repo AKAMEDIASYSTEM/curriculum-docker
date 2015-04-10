@@ -3,15 +3,17 @@ self-contained curriculum (test)
 
 ec2-based curriculum server test
 
-sudo apt-get install git redis-server libxml2-dev libxslt-dev beanstalkd build-essential python-dev python-pip python-imaging -y
+sudo apt-get install git beanstalkd mongod build-essential python-dev python-pip -y
 sudo pip install pattern tornado --upgrade
 
 Stack:
 
-__Nginx__ - listens to the world on port 80, load balances (but not much for us, since we only have one tornado instance running)
+__Nginx (not yet implemented)__ - listens to the world on port 80, load balances (but not much for us, since we only have one tornado instance running)
 /etc/nginx/nginx.conf - this holds the mapping from "listen on" to "send traffic to X servers"
 
-__Upstart__ - systemd-like "make sure main apps are running and if not, restart them". Need to document more config stuff for this.
+__Upstart (not yet implemented)__ - systemd-like "make sure main apps are running and if not, restart them". Need to document more config stuff for this.
+
+__Supervisord__ - copy the two .conf files to /etc/supervisor/init.d/
 
 __MongoDB__ - like its forebear, the new curriculum implementation uses Mongo for storing chunks of language. The DB is called curriculum
 * db.keywords - language fragments, probably simple K:V or List. TTL should be 7 days or so
