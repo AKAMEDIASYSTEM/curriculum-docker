@@ -8,13 +8,12 @@ from pymongo import MongoClient
 from handlers.BrowserHandler import BrowserHandler
 from handlers.ApiHandler import ApiHandler
 from handlers.SubmitHandler import SubmitHandler
-import datetime
 
 client = MongoClient(tz_aware=True)
 db = client.curriculum
 # settings = {'debug':True}
 # settings = {'debug':True, 'auth':auth} # not sure this will work, strike this first if stuff doesn't work
-settings = {'debug':True, 'auth':True}
+settings = {'debug': True, 'auth': True}
 # TODO: here populate the auth db with the credentials from keys.py or groups.py
 # also consider an api-based way to add groups (poss involving master key), this might be rly easy to scale?
 # no master keys w/o someone doing a security audit, maybe

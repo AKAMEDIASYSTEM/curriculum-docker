@@ -8,8 +8,6 @@ import tornado
 import random
 from handlers.BaseHandler import BaseHandler
 from ResponseObject import ResponseObject
-from tornado.template import Template
-from tornado.template import Loader
 
 
 class BrowserHandler(BaseHandler):

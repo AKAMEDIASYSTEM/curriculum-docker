@@ -2,13 +2,11 @@
 # tuned-resonator
 # experiments with google physical-web mdns broadcast
 
-import logging
-import tornado
 from handlers.BaseHandler import BaseHandler
 from ResponseObject import ResponseObject
 import datetime
 import beanstalkc
-from pymongo import MongoClient
+
 
 class SubmitHandler(BaseHandler):
     """json submission to curriculum-insular store"""
@@ -28,7 +26,7 @@ class SubmitHandler(BaseHandler):
             # if absent, add url to pages AND do lang processing
             # lang processing could poss be a beanstalk job with body= groupID|url
             # and later we split on the delimiter?
-            isThere = db.pages.find({'url':url,'groupID':groupID}).count()
+            isThere = db.pages.find({'url': url, 'groupID': groupID}).count()
             print 'isThere is ', isThere
             if isThere < 1:
                 # populate Pages collection
@@ -36,19 +34,19 @@ class SubmitHandler(BaseHandler):
                 # hey we dont need timestamps in this anymore, do we?
                 # take them out if you decide TTL is sufficient?
                 db.pages.update(
-                    {'url':url, 'groupID':groupID},
-                    {'$push' : {'timestamp':timestamp}, '$set' : {'latest':timestamp}},
+                    {'url': url, 'groupID': groupID},
+                    {'$push': {'timestamp': timestamp}, '$set': {'latest': timestamp}},
                     upsert=True
                     )
-            combo = '|'.join((groupID,str(url)))
+            combo = '|'.join((groupID, str(url)))
             print combo
             combo = str(combo)
             beanstalk.put(combo)
             # maybe have a beanstalk queue for every groupID???
             # is that Smart?
-            self.response = ResponseObject('200','Success')
+            self.response = ResponseObject('200', 'Success')
         else:
             print 'isAuth returned False'
-            self.response = ResponseObject('500','Error - authentication failed')
+            self.response = ResponseObject('500', 'Error - authentication failed')
         self.write_response()
         self.finish()
