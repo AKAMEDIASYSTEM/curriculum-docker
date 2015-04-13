@@ -29,7 +29,10 @@ __startDB.py__ - this shoves credentials from groups.py (NOT in this repo, full 
 __beanstalk.sh__ - must be run on boot, before __startDB.py__ and __server/server.py__
 
 __/server/server.py__ - this is the main tornado instance.
-* ApiHandler.py - services API queries. 
+* ApiHandler.py - services API queries; trying a single endpoint here for flexibility
+** __t=4__ - number of minutes into the past to look
+** __n=4__ - number of entries to return, drawn randomly from the result-set
+** __type=ADJP__ - restrict results to a chunktype. Types available are: {NP, PP, VP, ADJP, ADVP, ANY}
 * BaseHandler.py - just a superclass contining the isAuth() function
 * BrowserHandler.py - services web queries, currently only ZEN mode (this would be the prototype for other views - add new views to curriculum-insular/server/templates)
 * SubmitHandler.py - accepts URLs from Chrome extension.
