@@ -59,6 +59,9 @@ while True:
         print url
         print e
         pass
+    except:
+        print url
+        print 'AKA unhandled exception that we will try to just destroy without halting and catching fire'
     # end of if(isThere < 2)
     job.delete()
     print 'job deleted, we think this was all successful - loop over'

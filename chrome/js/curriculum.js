@@ -7,8 +7,7 @@ var ignores = ["curriculum.nytlabs.com",
                 "ec2-107-21-88-135.compute-1.amazonaws.com",
                 "localhost",
                 "192.168.",
-                "127.0.",
-                "t.co"]; // do not semantically analyze URLs contining these strings
+                "127.0."]; // do not semantically analyze URLs contining these strings
 var path = window.location.href;
 var isHttps = path.split(":")[0];
 var time = new Date().getTime();
