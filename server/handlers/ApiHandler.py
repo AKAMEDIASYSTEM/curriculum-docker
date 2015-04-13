@@ -29,6 +29,7 @@ class ApiHandler(BaseHandler):
                 r = db.keywords.find({'latest':{'$gte':earliest},'groupID':groupID, 'type':ty.upper()},{'keyword':1,'type':1,'_id':0})
                 # r = db.keywords.find({'latest':{'$gte':earliest},'groupID':groupID, 'type':ty}) # this was to test query
             results = [word['keyword'] for word in r]
+            # TODO check here if results is non-empty
             while found < int(n):
                 k = random.choice(results)
                 if k not in keywords:
