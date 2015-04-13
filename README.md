@@ -14,16 +14,11 @@ __Nginx (not yet implemented)__ - listens to the world on port 80, load balances
 __Upstart (not yet implemented)__ - systemd-like "make sure main apps are running and if not, restart them". Need to document more config stuff for this.
 
 __Supervisord__ - copy the two .conf files to /etc/supervisor/init.d/ and then run supervisor to start:
-
-`sudo cp /curriculum-insular/curriculum_insular_* /etc/supervisor/init.d/`
-
-OR `sudo cp /curriculum-insular/curriculum_insular_* /etc/supervisor/conf.d/` if init.d is absent
-
-`sudo supervisorctl start curriculum_worker`
-
-`sudo supervisorctl start curriculum_server`
-
-to check status at any time, run `sudo supervisorctl` OR just check the logs in /var/log/supervisor/
+>`sudo cp /curriculum-insular/curriculum_insular_* /etc/supervisor/init.d/`
+>OR `sudo cp /curriculum-insular/curriculum_insular_* /etc/supervisor/conf.d/` if init.d is absent
+>`sudo supervisorctl start curriculum_worker`
+>`sudo supervisorctl start curriculum_server`
+>to check status at any time, run `sudo supervisorctl` OR just check the logs in /var/log/supervisor/
 
 __MongoDB__ - like its forebear, the new curriculum implementation uses Mongo for storing chunks of language. The DB is called curriculum
 * __db.keywords__ - language fragments, probably simple K:V or List. TTL should be 7 days or so
