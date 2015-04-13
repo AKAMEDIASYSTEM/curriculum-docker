@@ -4,9 +4,7 @@
 
 import beanstalkc
 from pattern.web import URL, plaintext, URLError, MIMETYPE_WEBPAGE, MIMETYPE_PLAINTEXT, HTTPError
-from pattern.en import parse as text_parse # to keep distinct from urllib's parse
 from pattern.en import parsetree
-import sys
 from pymongo import MongoClient
 import datetime
 
@@ -19,7 +17,7 @@ while True:
     # resolve URL into chunks and shove them in 'keywords' with same groupID
     # delete job
     print 'starting worker outer loop'
-    job = beanstalk.reserve() # this is blocking, waits till there's something on the stalk
+    job = beanstalk.reserve()  # this is blocking, waits till there's something on the stalk
     pay = job.body.split('|')
     groupID = pay[0]
     url = URL(pay[-1])
@@ -40,7 +38,6 @@ while True:
                    encoding = 'utf-8'       # Input string encoding.
                      tagset = None)         # Penn Treebank II (default) or UNIVERSAL.
             '''
-            # parsed = text_parse(s, chunks = True)
             parsed = parsetree(s, chunks=True)
             for sentence in parsed:
                 # only noun phrases for now but let's pick some good other ones next week
@@ -49,10 +46,10 @@ while True:
                 # for chunk in gen:
                 for chunk in sentence.chunks:
                     d = db.keywords.update(
-                            {'keyword':chunk.string, 'type':chunk.type, 'groupID':groupID},
-                            {'$push' : {'timestamp':timestamp, 'url':url.string}, '$set' : {'latest':timestamp}},
-                            upsert=True
-                            )
+                        {'keyword': chunk.string, 'type': chunk.type, 'groupID': groupID},
+                        {'$push': {'timestamp': timestamp, 'url': url.string}, '$set': {'latest': timestamp}},
+                        upsert=True
+                        )
                     # print d
         else:
             'we failed the mimetype test again wtf'
