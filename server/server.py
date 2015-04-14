@@ -20,7 +20,7 @@ settings = {'debug': True}
 # also consider an api-based way to add groups (poss involving master key), this might be rly easy to scale?
 # no master keys w/o someone doing a security audit, maybe
 
-print 'starting DB'
+print 'starting DB for the first time we think'
 startDB.startDB(db)
 print 'started DB'
 
