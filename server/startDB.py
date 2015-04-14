@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# curriculum-docker
+# curriculum-insular
 '''
 StartDB is in charge of reading a static 'groups.py' file that is NOT in the repo
 groups.py has the following structure
@@ -21,10 +21,6 @@ import groups
 
 TTL_text = 604800  # 7 days
 TTL_url = 600  # ten minutes
-
-mongoAddress = os.getenv("AKAMONGO_PORT_27017_TCP_ADDR")
-client = MongoClient(mongoAddress, tz_aware=True)
-curr_db = client.curriculum
 
 
 def create_keywords_collection(db):
@@ -49,16 +45,24 @@ def create_pages_collection(db):
     db.pages.ensure_index('url')
     logging.info('Created TTL-enabled collection "pages" in database "curriculum"')
 
-try:
-    create_keywords_collection(curr_db)
-except pymongo.errors.CollectionInvalid:
-    pass
-try:
-    create_pages_collection(curr_db)
-except pymongo.errors.CollectionInvalid:
-    pass
-try:
-    create_users_collection(curr_db)
-except pymongo.errors.CollectionInvalid:
-    pass
-logging.info("Finished setting up Mongo DBs")
+
+def startDB():
+    mongoAddress = os.getenv("AKAMONGO_PORT_27017_TCP_ADDR")
+    client = MongoClient(mongoAddress, tz_aware=True)
+    curr_db = client.curriculum
+    try:
+        create_keywords_collection(curr_db)
+    except pymongo.errors.CollectionInvalid:
+        pass
+    try:
+        create_pages_collection(curr_db)
+    except pymongo.errors.CollectionInvalid:
+        pass
+    try:
+        create_users_collection(curr_db)
+    except pymongo.errors.CollectionInvalid:
+        pass
+    logging.info("Finished setting up Mongo DBs")
+
+if __name__ == '__main__':
+    startDB()
