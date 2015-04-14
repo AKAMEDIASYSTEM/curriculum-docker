@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# curriculum-insular
+# curriculum-docker
 
 
 import logging
