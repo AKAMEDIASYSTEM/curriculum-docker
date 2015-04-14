@@ -23,7 +23,7 @@ TTL_text = 604800  # 7 days
 TTL_url = 600  # ten minutes
 
 
-def startDB(self, db):
+def startDB(db):
     print 'in startDB now'
     # mongoAddress = os.getenv("AKAMONGO_PORT_27017_TCP_ADDR")
     # client = MongoClient(mongoAddress, tz_aware=True)
