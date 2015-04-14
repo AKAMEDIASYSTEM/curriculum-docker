@@ -16,6 +16,7 @@ grouplist = [
 import logging
 import pymongo
 from pymongo import MongoClient
+import os
 import groups
 
 TTL_text = 604800  # 7 days
@@ -46,7 +47,8 @@ def create_pages_collection(db):
 
 
 def startDB():
-    client = MongoClient(tz_aware=True)
+    mongoAddress = os.getenv("AKAMONGO_PORT_27017_TCP_ADDR")
+    client = MongoClient(mongoAddress, tz_aware=True)
     curr_db = client.curriculum
     try:
         create_keywords_collection(curr_db)
@@ -63,7 +65,8 @@ def startDB():
     logging.info("Finished setting up Mongo DBs")
 
 if __name__ == '__main__':
-    client = MongoClient(tz_aware=True)
+    mongoAddress = os.getenv("AKAMONGO_PORT_27017_TCP_ADDR")
+    client = MongoClient(mongoAddress, tz_aware=True)
     curr_db = client.curriculum
     try:
         create_keywords_collection(curr_db)
