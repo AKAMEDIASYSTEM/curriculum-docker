@@ -27,7 +27,7 @@ class BrowserHandler(BaseHandler):
             logging.debug('groupID is %s' % groupID)
             r = db.keywords.find({'latest': {'$gte': earliest}, 'groupID': groupID}, {'keyword': 1, '_id': 0})
             d = [word['keyword'] for word in r]
-            loader = tornado.template.Loader('../curriculum-insular/server/templates')
+            loader = tornado.template.Loader('templates')
             keywords = []
             found = 0
             while found < 4:
