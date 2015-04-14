@@ -24,6 +24,7 @@ TTL_url = 600  # ten minutes
 
 
 def startDB(self, db):
+    print 'in startDB now'
     # mongoAddress = os.getenv("AKAMONGO_PORT_27017_TCP_ADDR")
     # client = MongoClient(mongoAddress, tz_aware=True)
     # curr_db = client.curriculum
