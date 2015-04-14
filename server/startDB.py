@@ -29,15 +29,15 @@ def startDB(self, db):
     # client = MongoClient(mongoAddress, tz_aware=True)
     # curr_db = client.curriculum
     try:
-        create_keywords_collection(curr_db)
+        create_keywords_collection(db)
     except pymongo.errors.CollectionInvalid:
         pass
     try:
-        create_pages_collection(curr_db)
+        create_pages_collection(db)
     except pymongo.errors.CollectionInvalid:
         pass
     try:
-        create_users_collection(curr_db)
+        create_users_collection(db)
     except pymongo.errors.CollectionInvalid:
         pass
     logging.info("Finished setting up Mongo DBs")
