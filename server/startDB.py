@@ -46,38 +46,19 @@ def create_pages_collection(db):
     logging.info('Created TTL-enabled collection "pages" in database "curriculum"')
 
 
-def startDB():
-    mongoAddress = os.getenv("AKAMONGO_PORT_27017_TCP_ADDR")
-    client = MongoClient(mongoAddress, tz_aware=True)
-    curr_db = client.curriculum
-    try:
-        create_keywords_collection(curr_db)
-    except pymongo.errors.CollectionInvalid:
-        pass
-    try:
-        create_pages_collection(curr_db)
-    except pymongo.errors.CollectionInvalid:
-        pass
-    try:
-        create_users_collection(curr_db)
-    except pymongo.errors.CollectionInvalid:
-        pass
-    logging.info("Finished setting up Mongo DBs")
-
-if __name__ == '__main__':
-    mongoAddress = os.getenv("AKAMONGO_PORT_27017_TCP_ADDR")
-    client = MongoClient(mongoAddress, tz_aware=True)
-    curr_db = client.curriculum
-    try:
-        create_keywords_collection(curr_db)
-    except pymongo.errors.CollectionInvalid:
-        pass
-    try:
-        create_pages_collection(curr_db)
-    except pymongo.errors.CollectionInvalid:
-        pass
-    try:
-        create_users_collection(curr_db)
-    except pymongo.errors.CollectionInvalid:
-        pass
-    logging.info("Finished setting up Mongo DBs")
+mongoAddress = os.getenv("AKAMONGO_PORT_27017_TCP_ADDR")
+client = MongoClient(mongoAddress, tz_aware=True)
+curr_db = client.curriculum
+try:
+    create_keywords_collection(curr_db)
+except pymongo.errors.CollectionInvalid:
+    pass
+try:
+    create_pages_collection(curr_db)
+except pymongo.errors.CollectionInvalid:
+    pass
+try:
+    create_users_collection(curr_db)
+except pymongo.errors.CollectionInvalid:
+    pass
+logging.info("Finished setting up Mongo DBs")
