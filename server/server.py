@@ -21,7 +21,7 @@ settings = {'debug': True}
 # no master keys w/o someone doing a security audit, maybe
 
 print 'starting DB'
-startDB.startDB(db)
+startDB(db)
 print 'started DB'
 
 application = tornado.web.Application([
