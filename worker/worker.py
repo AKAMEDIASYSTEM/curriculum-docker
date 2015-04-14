@@ -11,7 +11,7 @@ import os
 
 # beanstalk = beanstalkc.Connection(host='localhost', port=14711)
 # client = MongoClient(tz_aware=True)
-beanstalk = beanstalkc.Connection(host=os.getenv("AKABEANSTALK_PORT_14711_TCP_ADDR"), port=14711)
+beanstalk = beanstalkc.Connection(host=os.getenv("AKABEANSTALK_PORT_14711_TCP_ADDR"), port=14711, parse_yaml=False)
 client = MongoClient(os.getenv("AKAMONGO_PORT_27017_TCP_ADDR"), tz_aware=True)
 db = client.curriculum
 
