@@ -6,13 +6,14 @@ from handlers.BaseHandler import BaseHandler
 from ResponseObject import ResponseObject
 import datetime
 import beanstalkc
+import os
 
 
 class SubmitHandler(BaseHandler):
     """json submission to curriculum-insular store"""
 
     def post(self):
-        beanstalk = beanstalkc.Connection(host='localhost', port=14711)
+        beanstalk = beanstalkc.Connection(host=os.getenv("AKABEANSTALK_PORT_14711_TCP_ADDR"), port=14711, parse_yaml=False)
         print 'inside curriculum-insular SubmitHandler'
         if self.isAuth():
             print 'isAuth was successful'
