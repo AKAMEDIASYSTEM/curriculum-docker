@@ -41,7 +41,7 @@ Get docker
 `sudo apt-get install docker`
 ...just kidding! You __must__ follow the absurd wget instructions [here](https://docs.docker.com/installation/ubuntulinux/)
 
-__Note this part to avoid perpetually having to "sudo !!"__
+__Note this part to avoid perpetually having to `sudo !!`__
 
 ````
 If you would like to use Docker as a non-root user, you should now consider
