@@ -16,7 +16,6 @@ mongoAddress = os.getenv("AKAMONGO_PORT_27017_TCP_ADDR")
 client = MongoClient(mongoAddress, tz_aware=True)
 db = client.curriculum
 settings = {'debug': True}
-# TODO: here populate the auth db with the credentials from keys.py or groups.py
 # also consider an api-based way to add groups (poss involving master key), this might be rly easy to scale?
 # no master keys w/o someone doing a security audit, maybe
 
