@@ -1,5 +1,4 @@
 #self-contained curriculum
-===============
 
 ec2-based __dockerized__ curriculum server test
 
@@ -80,5 +79,3 @@ cd /curriculum-docker/server
 docker build -t akaserver .
 ```
 ...then execute the four "run" steps in the section above
-
-`sudo rm -r /var/lib/mongodb/`
