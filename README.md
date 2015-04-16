@@ -34,7 +34,7 @@ __/chrome__ - this holds the Chrome extension that submits HTTP URLs to the serv
 
 
 ***DEPLOYMENT NOTES***
-[[http://cdn.gifbay.com/2013/08/oh_neato-77078.gif]]
+[[ http://cdn.gifbay.com/2013/08/oh_neato-77078.gif ]]
 Get docker
 `sudo apt-get install docker`
 
