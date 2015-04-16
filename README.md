@@ -52,6 +52,10 @@ adding your user to the "docker" group with something like:
 Remember that you will have to log out and back in for this to take effect!
 ````
 
+Git pull this repo
+
+MANUALLY add the 'groups.py' file necessary for authentication to work
+
 Generate images from dockerfiles:
 * mongo image is the default, we don't need to generate it here
 * beanstalk: go to /beanstalk, type `docker build -t akabeanstalk . `
@@ -60,7 +64,7 @@ Generate images from dockerfiles:
 
 Run each image __in this order__:
 
-* `docker run --name akamongo -d -p 27017:27017 mongo --smallfiles`
+* `docker run -d -p 27017:27017 -v /var/lib/mongodb/:/data/db --name akamongo mongo --smallfiles`
 * `docker run --name akabeanstalk -d akabeanstalk`
 * `docker run --name akaworker -d --link akamongo:akamongo --link akabeanstalk:akabeanstalk akaworker`
 * `docker run --name akaserver -d --link akamongo:akamongo --link akabeanstalk:akabeanstalk -p 80:80 akaserver`
