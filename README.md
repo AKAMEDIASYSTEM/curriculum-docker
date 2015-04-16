@@ -39,6 +39,7 @@ __/chrome__ - this holds the Chrome extension that submits HTTP URLs to the serv
 
 Get docker
 `sudo apt-get install docker`
+...just kidding! You __must__ follow the absurd wget instructions [here](https://docs.docker.com/installation/ubuntulinux/)
 
 Generate images from dockerfiles:
 * mongo image is the default, we don't need to generate it here
