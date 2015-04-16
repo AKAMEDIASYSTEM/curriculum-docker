@@ -34,3 +34,15 @@ __/chrome__ - this holds the Chrome extension that submits HTTP URLs to the serv
 
 
 ***DEPLOYMENT NOTES***
+<iframe src="//giphy.com/embed/bqrG9EUt9vS4U?html5=true" width="480" height="391" frameBorder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+Get docker
+`sudo apt-get install docker`
+
+Generate images from dockerfiles:
+* mongo image is the default, we don't need to generate it here
+* beanstalk: go to /beanstalk, type `docker build -t akabeanstalk . `
+* worker: go to /worker, type `docker build -t akaworker . `
+* server: go to /server, type `docker build -t akaserver . `
+
+Run each image __in this order__:
+
