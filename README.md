@@ -1,12 +1,9 @@
-self-contained curriculum (test)
+#self-contained curriculum
 ===============
 
-ec2-based __dockerized__ curriculum server test B-)
+ec2-based __dockerized__ curriculum server test
 
-`sudo apt-get install git beanstalkd mongod build-essential python-dev python-pip -y`
-`sudo pip install pattern tornado --upgrade`
-
-Stack:
+### Stack:
 
 Docker - all the cool kids are doing it while crying
 
@@ -33,7 +30,7 @@ __/server/server.py__ - this is the main tornado instance.
 __/chrome__ - this holds the Chrome extension that submits HTTP URLs to the server
 
 
-***DEPLOYMENT NOTES***
+### DEPLOYMENT NOTES
 
 ![OHBOY]( http://cdn.gifbay.com/2013/08/oh_neato-77078.gif )
 
@@ -69,3 +66,19 @@ Run each image __in this order__:
 * `docker run --name akaworker -d --link akamongo:akamongo --link akabeanstalk:akabeanstalk akaworker`
 * `docker run --name akaserver -d --link akamongo:akamongo --link akabeanstalk:akabeanstalk -p 80:80 akaserver`
 * You must be thirsty :beer:
+
+
+### Restarting and adding new groups:
+This currently sucks. If the server crashes, you must manually wipe the DB before restarting.
+```
+docker stop akaserver akaworker akabeanstalk akamongo
+docker rm akaserver akaworker akabeanstalk akamongo
+docker rmi mongo akaserver
+sudo rm -r /var/lib/mongodb/
+cd /curriculum-docker/server
+(edit groups.py to add new groups and tokens)
+docker build -t akaserver .
+```
+...then execute the four "run" steps in the section above
+
+`sudo rm -r /var/lib/mongodb/`
