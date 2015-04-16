@@ -47,6 +47,7 @@ Generate images from dockerfiles:
 * server: go to /server, type `docker build -t akaserver . `
 
 Run each image __in this order__:
+
 `docker run --name akamongo -d -p 27017:27017 mongo --smallfiles`
 `docker run --name akabeanstalk -d akabeanstalk`
 `docker run --name akaworker -d --link akamongo:akamongo --link akabeanstalk:akabeanstalk akaworker`
