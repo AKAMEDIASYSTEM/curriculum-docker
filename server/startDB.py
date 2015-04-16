@@ -45,7 +45,7 @@ def create_keywords_collection(db):
 def create_users_collection(db):
     try:
         # db.create_collection('users')
-        db.users.create_index('groupID')
+        db.users.create_index('groupID', unique=True)
         db.users.insert(groups.grouplist)  # bulk insert FTW
         logging.info('Added all groups.py to db.users DB')
     except pymongo.errors.CollectionInvalid:
