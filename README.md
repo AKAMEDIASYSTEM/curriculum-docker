@@ -15,8 +15,6 @@ __Beanstalk__ - handles the queue of URLS-to-analyze from SubmitHandler. `beanst
 
 __/worker.py__ - this takes jobs form Beanstalk, checks db.pages to see if it should be resolved, and resolves it into chunks that are loaded into db.keywords
 
-__startDB.py__ - this shoves credentials from groups.py (NOT in this repo, full o' secrets) into db.users
-
 __/server/server.py__ - this is the main tornado instance.
 * ApiHandler.py - services API queries; trying a single endpoint here for flexibility
   * __t=4__ - number of minutes into the past to look
