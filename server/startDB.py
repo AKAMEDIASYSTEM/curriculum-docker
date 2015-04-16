@@ -15,8 +15,6 @@ grouplist = [
 
 import logging
 import pymongo
-from pymongo import MongoClient
-import os
 import groups
 
 TTL_text = 604800  # 7 days
@@ -24,46 +22,46 @@ TTL_url = 600  # ten minutes
 
 
 def startDB(db):
-    print 'in startDB now'
-    # mongoAddress = os.getenv("AKAMONGO_PORT_27017_TCP_ADDR")
-    # client = MongoClient(mongoAddress, tz_aware=True)
-    # curr_db = client.curriculum
-    try:
-        create_keywords_collection(db)
-    except pymongo.errors.CollectionInvalid:
-        pass
-    try:
-        create_pages_collection(db)
-    except pymongo.errors.CollectionInvalid:
-        pass
-    try:
-        create_users_collection(db)
-    except pymongo.errors.CollectionInvalid:
-        pass
+    logging.info('in startDB now')
+    create_keywords_collection(db)
+    create_pages_collection(db)
+    create_users_collection(db)
     logging.info("Finished setting up Mongo DBs")
 
 
 def create_keywords_collection(db):
-    db.create_collection('keywords')
-    db.keywords.ensure_index('latest', expireAfterSeconds=TTL_text)
-    db.keywords.ensure_index('keyword')
-    db.keywords.ensure_index('type')
-    logging.info('Created TTL-enabled collection "keywords" in database "curriculum"')
+    try:
+        # db.create_collection('keywords')
+        db.keywords.create_index('latest', expireAfterSeconds=TTL_text)
+        db.keywords.create_index('keyword')
+        db.keywords.create_index('type')
+        logging.info('Created TTL-enabled collection "keywords" in database "curriculum"')
+    except pymongo.errors.CollectionInvalid:
+        # oh! this error is what you get when the collection already exists
+        logging.info('keywords collection already existed')
+        pass
 
 
 def create_users_collection(db):
-    db.create_collection('users')
-    db.users.ensure_index('groupID')
-    logging.info('Created UNcapped collection "users" in database "curriculum"')
-    db.users.insert(groups.grouplist)  # bulk insert FTW
-    logging.info('Added all groups.py to db.users DB')
+    try:
+        # db.create_collection('users')
+        db.users.create_index('groupID')
+        db.users.insert(groups.grouplist)  # bulk insert FTW
+        logging.info('Added all groups.py to db.users DB')
+    except pymongo.errors.CollectionInvalid:
+        logging.info('users collection already existed')
+        pass
 
 
 def create_pages_collection(db):
-    db.create_collection('pages')
-    db.pages.ensure_index('timestamp', expireAfterSeconds=TTL_url)
-    db.pages.ensure_index('url')
-    logging.info('Created TTL-enabled collection "pages" in database "curriculum"')
+    try:
+        # db.create_collection('pages')
+        db.pages.create_index('timestamp', expireAfterSeconds=TTL_url)
+        db.pages.create_index('url')
+        logging.info('Created TTL-enabled collection "pages" in database "curriculum"')
+    except pymongo.errors.CollectionInvalid:
+        logging.info('pages collection already existed')
+        pass
 
 
 if __name__ == '__main__':
