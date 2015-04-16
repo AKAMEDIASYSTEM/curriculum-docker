@@ -65,7 +65,7 @@ Generate images from dockerfiles:
 Run each image __in this order__:
 
 * `docker run -d -p 27017:27017 -v /var/lib/mongodb/:/data/db --name akamongo mongo --smallfiles`
-* `docker run --name akabeanstalk -d akabeanstalk`
+* `docker run --name akabeanstalk -d -p 14711:14711 akabeanstalk`
 * `docker run --name akaworker -d --link akamongo:akamongo --link akabeanstalk:akabeanstalk akaworker`
 * `docker run --name akaserver -d --link akamongo:akamongo --link akabeanstalk:akabeanstalk -p 80:80 akaserver`
 * You must be thirsty :beer:
