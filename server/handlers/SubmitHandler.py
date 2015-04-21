@@ -25,8 +25,6 @@ class SubmitHandler(BaseHandler):
             # search pages collection for this url and groupID combo
             # if present already, do nothing (pages coll has TTL of 10 mins)
             # if absent, add url to pages AND do lang processing
-            # lang processing could poss be a beanstalk job with body= groupID|url
-            # and later we split on the delimiter?
             isThere = db.pages.find({'url': url, 'groupID': groupID}).count()
             print 'isThere is ', isThere
             if isThere < 1:
@@ -45,8 +43,6 @@ class SubmitHandler(BaseHandler):
                 beanstalk.put(combo)
             else:
                 print 'we have already seen this groupID and url recently, not queueing it', url
-            # maybe have a beanstalk queue for every groupID???
-            # is that Smart?
             self.response = ResponseObject('200', 'Success')
         else:
             print 'isAuth returned False'
