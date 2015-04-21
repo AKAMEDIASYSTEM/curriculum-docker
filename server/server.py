@@ -19,9 +19,13 @@ settings = {'debug': True}
 # also consider an api-based way to add groups (poss involving master key), this might be rly easy to scale?
 # no master keys w/o someone doing a security audit, maybe
 
-print 'starting DB for the first time we think'
-startDB.startDB(db)
-print 'started DB'
+test_q = db.users.find().count()
+if test_q < 1:
+    print 'starting DB for the first time we think'
+    startDB.startDB(db)
+    print 'started DB'
+else:
+    print 'DB seems already to be set up, continuing server launch'
 
 application = tornado.web.Application([
     (r"/api", ApiHandler),
