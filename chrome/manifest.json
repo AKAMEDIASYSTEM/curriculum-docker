@@ -1,10 +1,10 @@
 /*
- * Copyright (c) 2014 nytlabs, nfeehan.
+ * Copyright (c) 2015 nytlabs, nfeehan.
  */
 {
   "name": "Curriculum",
-  "version": "2.1",
-  "manifest_version": 2,
+  "version": "3",
+  "manifest_version": 3,
   "description": "This extension aggregates the topics and domain names browsed by people in a group; a separate client will create a real-time topic display from this information",
   "content_scripts" : [
     {
