@@ -4,4 +4,4 @@ ADD . .
 
 EXPOSE 80
 
-CMD ["python", "server.py", "--logging", "debug"]
+CMD ["python", "-u", "server.py", "--logging", "debug"]
