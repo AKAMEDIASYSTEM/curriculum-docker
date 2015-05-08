@@ -15,7 +15,7 @@ import os
 mongoAddress = os.getenv("AKAMONGO_PORT_27017_TCP_ADDR")
 client = MongoClient(mongoAddress, tz_aware=True)
 db = client.curriculum
-settings = {'debug': True, 'static_path':'static'}
+settings = {'debug': True, "static_path": os.path.join(os.path.dirname(__file__), "static")}
 # also consider an api-based way to add groups (poss involving master key), this might be rly easy to scale?
 # no master keys w/o someone doing a security audit, maybe
 
