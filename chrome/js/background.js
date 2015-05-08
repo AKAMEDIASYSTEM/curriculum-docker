@@ -19,11 +19,14 @@ chrome.runtime.onMessage.addListener(
                     response = "POST failed";
                     console.log("The POST to server failed");
                 });
+                // also post to any local instances running curriculum
+                $.post("http://curriculum.local/submit", request.queryData, function(data) {
+                    console.log("submitted to LOCAL"+request.queryData.url+" to http://curriculum.local/submit");
+                }).error(function() {
+                    response = "POST failed";
+                    console.log("The POST to LOCAL server failed");
+                });
             } else {
-                // should make an html layout for popup window
-                // like: window.open("path to layout.html")
-                // localStorage.curriculum_groupID = "nytlabs";
-                // localStorage.curriculum_token = "frankd0g_is_the_raddest";
                 sendResponse("no_creds");
             }
         
