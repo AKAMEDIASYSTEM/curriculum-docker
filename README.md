@@ -24,7 +24,9 @@ __/server/server.py__ - this is the main tornado instance.
 * BrowserHandler.py - services web queries, currently only ZEN mode (this would be the prototype for other views - add new views to curriculum-insular/server/templates)
 * SubmitHandler.py - accepts URLs from Chrome extension.
 
-__/chrome__ - this holds the Chrome extension that submits HTTP URLs to the server
+__/chrome__ - this holds the Chrome extension that submits HTTP URLs to the server. The extension will prompt you for a groupID and token upon first install.
+
+__/firefox__ - this holds the Firefox extension that submits HTTP URLs to the server. *Note*, you must enter your groupID and token to /data/submitter.js manually before installing.
 
 
 ### DEPLOYMENT NOTES
