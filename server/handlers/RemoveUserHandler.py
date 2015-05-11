@@ -17,26 +17,33 @@ class RemoveUserHandler(BaseHandler):
     '''
 
     def get(self):
+        db = self.settings['db']
         master_group = self.get_argument('groupID')
         master_token = self.get_argument('token')
         new_groupID = self.get_argument('new_groupID')
         new_token = self.get_argument('new_token')
-        db = self.settings['db']
-        dbq = db.users.find({'$and': [
-            {'groupID': master_group},
-            {'token': master_token}
-            ]}).count()
-        if dbq == 1:
-            r = db.users.remove({'groupID': new_groupID, 'token': new_token})
-            print 'db removal result is ', r
-            keywords = ['removed %s and %s to users DB' % (new_groupID, new_token)]
-            d = {'title': 'curriculum-docker', 'keywords': keywords}
-            self.response = ResponseObject('200', 'Success', d)
+        # ruff check for obv prob
+        if new_groupID is master_group:
+            self.response = ResponseObject('500', 'Choose another groupID')
+            self.write_response()
+            self.finish()
         else:
-            keywords = ['master authorization credentials were rejected']
-            self.response = ResponseObject('500', 'Master Authentication failed', dbq)
-        # check token against submitted token
-        # if pass, add two other vars to users DB
-        # return message confirming addition if successful
-        self.write_response()
-        self.finish()
+            dbq = db.users.find({'$and': [
+                {'groupID': master_group},
+                {'token': master_token},
+                {'privileged': True},
+                ]}).count()
+            if dbq == 1:
+                r = db.users.remove({'groupID': new_groupID, 'token': new_token})
+                print 'db removal result is ', r
+                keywords = ['removed %s and %s to users DB' % (new_groupID, new_token)]
+                d = {'title': 'curriculum-docker', 'keywords': keywords}
+                self.response = ResponseObject('200', 'Success', d)
+            else:
+                keywords = ['master authorization credentials were rejected']
+                self.response = ResponseObject('500', 'Master Authentication failed', dbq)
+            # check token against submitted token
+            # if pass, add two other vars to users DB
+            # return message confirming addition if successful
+            self.write_response()
+            self.finish()
