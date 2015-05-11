@@ -17,6 +17,7 @@ class AddUserHandler(BaseHandler):
     '''
 
     def get(self):
+        print 'hit the addUser handler'
         db = self.settings['db']
         master_group = self.get_argument('groupID')
         master_token = self.get_argument('token')
