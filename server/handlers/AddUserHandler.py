@@ -23,6 +23,7 @@ class AddUserHandler(BaseHandler):
         master_token = self.get_argument('token')
         new_groupID = self.get_argument('new_groupID')
         new_token = self.get_argument('new_token')
+        print 'we see %s %s %s %s' % (master_group, master_token, new_groupID, new_token)
         # ruff check for obv prob
         if new_groupID is master_group:
             self.response = ResponseObject('500', 'Choose another groupID')
@@ -34,6 +35,7 @@ class AddUserHandler(BaseHandler):
                 {'token': master_token},
                 {'privileged': True},
                 ]}).count()
+            print 'db query result is ', dbq
             if dbq == 1:
                 r = db.users.update({'groupID': new_groupID, 'token': new_token})
                 print 'db insertion result is ', r
