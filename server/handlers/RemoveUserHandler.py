@@ -35,7 +35,7 @@ class RemoveUserHandler(BaseHandler):
                 {'privileged': True},
                 ]}).count()
             if dbq == 1:
-                r = db.users.remove_one({'groupID': new_groupID, 'token': new_token}, True)
+                r = db.users.delete_one({'groupID': new_groupID, 'token': new_token}, True)
                 print 'db removal result is ', r
                 keywords = ['removed %s and %s to users DB' % (new_groupID, new_token)]
                 d = {'title': 'curriculum-docker', 'keywords': keywords}

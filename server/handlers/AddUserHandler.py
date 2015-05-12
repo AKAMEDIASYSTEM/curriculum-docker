@@ -38,7 +38,7 @@ class AddUserHandler(BaseHandler):
                 ]}).count()
             print 'db query result is ', dbq
             if dbq == 1:
-                r = db.users.update_one({'groupID': new_groupID, 'token': new_token}, True)
+                r = db.users.insert_one({'groupID': new_groupID, 'token': new_token})
                 print 'db insertion result is ', r
                 keywords = ['added %s and %s to users DB' % (new_groupID, new_token)]
                 d = {'title': 'curriculum-docker', 'keywords': keywords}
