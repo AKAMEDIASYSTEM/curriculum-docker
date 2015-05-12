@@ -29,6 +29,7 @@ class AddUserHandler(BaseHandler):
             self.response = ResponseObject('500', 'Choose another groupID')
             self.write_response()
             self.finish()
+            return
         else:
             dbq = db.users.find({'$and': [
                 {'groupID': master_group},
