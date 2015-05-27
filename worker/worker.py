@@ -57,7 +57,6 @@ while True:
                     {'$push': {'timestamp': timestamp, 'url': url.string}, '$set': {'latest': timestamp}},
                     upsert=True
                     )
-                print d
     else:
         'we failed the mimetype test, we think mimetype is ', url.mimetype
     # except HTTPError, e:
