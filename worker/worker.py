@@ -3,7 +3,6 @@
 # AKA tuned-resonator curriculum-insular resolver/worker
 
 import beanstalkc
-# from pattern.web import URL, plaintext, URLError, MIMETYPE_WEBPAGE, MIMETYPE_PLAINTEXT, HTTPError
 import pattern.web
 from pattern.en import parsetree
 from pymongo import MongoClient
@@ -52,23 +51,15 @@ while True:
             # gen = (the_chunk for the_chunk in sentence.chunks if the_chunk.type=='NP')
             # for chunk in gen:
             for chunk in sentence.chunks:
-                d = db.keywords.update(
-                    {'keyword': chunk.string, 'type': chunk.type, 'groupID': groupID},
-                    {'$push': {'timestamp': timestamp, 'url': url.string}, '$set': {'latest': timestamp}},
-                    upsert=True
-                    )
+                try:
+                    d = db.keywords.update(
+                        {'keyword': chunk.string, 'type': chunk.type, 'groupID': groupID},
+                        {'$push': {'timestamp': timestamp, 'url': url.string}, '$set': {'latest': timestamp}},
+                        upsert=True
+                        )
+                except Exception as e:
+                    print 'mongo upsert error!', e
     else:
         'we failed the mimetype test, we think mimetype is ', url.mimetype
-    # except HTTPError, e:
-    #     # e = sys.exc_info()[0]
-    #     # print 'URLError on ', url
-    #     print url
-    #     print e
-    #     pass
-    # except e:
-    #     print e
-    #     print url
-    #     print 'AKA unhandled exception that we will try to just destroy without halting and catching fire'
-    # end of if(isThere < 2)
     job.delete()
     print 'job deleted, we think this was all successful - loop over'
