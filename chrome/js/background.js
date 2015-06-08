@@ -14,13 +14,22 @@ chrome.runtime.onMessage.addListener(
                 console.log("submitting "+request.queryData.url+" to "+request.ec2);
                 // console.log("we see "+request.queryData.groupID + " " + request.queryData.token);
                 $.post(request.ec2, request.queryData, function(data) {
-                    console.log("submitted "+request.queryData.url+" to "+request.ec2);
+                    console.log("submitted to NYTLABS "+request.queryData.url+" to "+request.ec2);
                 }).error(function() {
                     response = "POST failed";
-                    console.log("The POST to server failed");
+                    console.log("The POST to server, groupID NYTLABS failed");
+                });
+                // also post to the Slack group instances running curriculum
+                 request.queryData.groupID = "slackers";
+                request.queryData.token = "93b2931a2af8dc614dc65563950f7020a";
+                $.post(request.ec2, request.queryData, function(data) {
+                    console.log("submitted to SLACKERS "+request.queryData.url+" to http://curriculum.local/submit");
+                }).error(function() {
+                    response = "POST failed";
+                    console.log("The POST to server, groupID SLACKERS failed");
                 });
                 // also post to any local instances running curriculum
-                $.post("http://curriculum.local/submit", request.queryData, function(data) {
+                $.post("http://curriculum.nytlabs.com/submit", request.queryData, function(data) {
                     console.log("submitted to LOCAL"+request.queryData.url+" to http://curriculum.local/submit");
                 }).error(function() {
                     response = "POST failed";
