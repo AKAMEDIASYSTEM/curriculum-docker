@@ -13,7 +13,7 @@ __MongoDB__ - like its forebear, the new curriculum implementation uses Mongo fo
 
 __Beanstalk__ - handles the queue of URLS-to-analyze from SubmitHandler. `beanstalk.sh` or the command therein must be run before before __startDB.py__ and __server/server.py__
 
-__/worker.py__ - this takes jobs form Beanstalk, checks db.pages to see if it should be resolved, and resolves it into chunks that are loaded into db.keywords
+__/worker.py__ - this takes jobs form Beanstalk, checks db.pages to see if it should be resolved, and resolves it into chunks that are loaded into __db.keywords__. When the worker encounters a URL that chokes it, worker dies and is auto-restarted by Docker.
 
 __/server/server.py__ - this is the main tornado instance.
 * ApiHandler.py - services API queries; trying a single endpoint here for flexibility
