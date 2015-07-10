@@ -1,3 +1,22 @@
+/*
+to handle multiple groups:
+
+have plus sign button that causes new line of groupID/token to be added (PLUS server address?)
+
+upon page load, get localStorage.groups and unpack per
+http://stackoverflow.com/questions/3357553/how-to-store-an-array-in-localstorage
+
+upon "save" button press, trammel up all groupIDs, tokens, and servers to their respective arrays
+commit the stringified arrays to localStorage
+
+upon load background.js, unpack all groupids, servers, and tokens
+for each page, iterate through servers and POST
+
+*/
+
+
+
+
 // Saves options to localStorage.
 function save_options() {
   

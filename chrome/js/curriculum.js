@@ -3,6 +3,8 @@
 // var ec2 = "http://curriculum.nytlabs.com";
 // var ec2 = "http://ec2-52-0-128-225.compute-1.amazonaws.com";
 var ec2 = "http://ec2-52-5-251-35.compute-1.amazonaws.com";
+
+// load all servers form localStorage here?
 var ignores = ["curriculum.nytlabs.com",
                 "ec2-52-0-128-225.compute-1.amazonaws.com",
                 "ec2-107-21-88-135.compute-1.amazonaws.com",
