@@ -57,6 +57,6 @@ if(window.location.protocol == "https:") {
 
 chrome.runtime.sendMessage(message, function(response){
     if(response=="no_creds"){
-        alert("Please visit the Options page for your Curriculum extension; we are missing your GroupID and token.");
+        alert("Please visit the Options page for your Curriculum extension; we are missing your credentials.");
     }
 });

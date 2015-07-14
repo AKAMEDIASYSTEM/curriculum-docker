@@ -14,7 +14,7 @@ import os
 beanstalk = beanstalkc.Connection(host=os.getenv("AKABEANSTALK_PORT_14711_TCP_ADDR"), port=14711, parse_yaml=False)
 client = MongoClient(os.getenv("AKAMONGO_PORT_27017_TCP_ADDR"), tz_aware=True)
 db = client.curriculum
-
+print 'AKA WORKER IS STARTING'
 while True:
     # take URL and groupID
     # resolve URL into chunks and shove them in 'keywords' with same groupID
@@ -27,13 +27,20 @@ while True:
     print 'new url, we think', url
     timestamp = datetime.datetime.utcnow()
     try:
-        s = url.download(cached=True)
+        document = url.download(cached=True)
     except Exception as e:
         print 'the url.download failed on %s' % url
         print 'error is ', e
-        s = None
+        job.delete()
+        continue
     if (url.mimetype in pattern.web.MIMETYPE_WEBPAGE) or (url.mimetype in pattern.web.MIMETYPE_PLAINTEXT):
-        s = pattern.web.plaintext(s)
+        try:
+            doc_plain = pattern.web.plaintext(document)
+        except Exception as e:
+            print 'the plaintext parse failed on URL %s' % url
+            print 'error is ', e
+            job.delete()
+            continue
         '''
         parsetree(string,
                tokenize = True,         # Split punctuation marks from words?
@@ -44,7 +51,7 @@ while True:
                encoding = 'utf-8'       # Input string encoding.
                  tagset = None)         # Penn Treebank II (default) or UNIVERSAL.
         '''
-        parsed = parsetree(s, chunks=True)
+        parsed = parsetree(doc_plain, chunks=True)
         for sentence in parsed:
             # only noun phrases for now but let's pick some good other ones next week
             # seeing ADJP, ADVP, PP and VP mostly tho NP are predominant
@@ -59,6 +66,8 @@ while True:
                         )
                 except Exception as e:
                     print 'mongo upsert error!', e
+                    job.delete()
+                    continue
     else:
         'we failed the mimetype test, we think mimetype is ', url.mimetype
     job.delete()
