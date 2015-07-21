@@ -89,61 +89,50 @@ function add_blank_field(){
   // append concoction to parent
   var newLine = document.createElement("div");
   newLine.id = "line_"+1;
-  var id_in = document.createElement("input");
-  id_in.type = "text";
-  id_in.name = "groupID_input";
-  id_in.value = "new GroupID";
-  newLine.appendChild(id_in);
 
-  var tok_in = document.createElement("input");
-  tok_in.type = "text";
-  tok_in.name = "token_input";
-  tok_in.value = "new Token";
-  newLine.appendChild(tok_in);
+  var $formInline = $("<form class='form-inline'></form>")
+  var $formGroup = $("<div class='form-group'></div>")
 
-  var serv_in = document.createElement("input");
-  serv_in.type = "text";
-  serv_in.name = "server_input";
-  serv_in.value = "new Server";
-  newLine.appendChild(serv_in);
+  $(newLine).append($formInline)
+  $formInline.append($formGroup)
 
-  var del_but = document.createElement("button");
-  del_but.id = "remove";
-  del_but.innerHTML = "Delete";
+  var $id_in = $("<input type='text' name='groupID_input' class='form-control' value='new GroupID'>")
+  $formGroup.append($id_in)
 
-  newLine.appendChild(del_but);
+  var $tok_in = $("<input type='text' name='token_input' class='form-control' value='new Token'>")
+  $formGroup.append($tok_in)
+
+  var $serv_in = $("<input type='text' name='server_input' class='form-control' value='new Server'>")
+  $formGroup.append($serv_in)
+
+  var $del_but = ("<button id='remove' class='btn btn-default'><span class='glyphicon glyphicon-minus'></span> Delete</button>")
+  $formInline.append($del_but)
 
   $('div[id=server_info]').append(newLine);
   $('button[id=remove]').on('click',remove_field);
 }
 
 function add_saved_field(grp, tok, ser){
-
   var newLine = document.createElement("div");
   newLine.id = "line_"+1;
-  var id_in = document.createElement("input");
-  id_in.type = "text";
-  id_in.name = "groupID_input";
-  id_in.value = grp;
-  newLine.appendChild(id_in);
 
-  var tok_in = document.createElement("input");
-  tok_in.type = "text";
-  tok_in.name = "token_input";
-  tok_in.value = tok;
-  newLine.appendChild(tok_in);
+  var $formInline = $("<form class='form-inline'></form>")
+  var $formGroup = $("<div class='form-group'></div>")
 
-  var serv_in = document.createElement("input");
-  serv_in.type = "text";
-  serv_in.name = "server_input";
-  serv_in.value = ser;
-  newLine.appendChild(serv_in);
+  $(newLine).append($formInline)
+  $formInline.append($formGroup)
 
-  var del_but = document.createElement("button");
-  del_but.id = "remove";
-  del_but.innerHTML = "Delete";
+  var $id_in = $("<input type='text' name='groupID_input' class='form-control' value='" + grp + "'>")
+  $formGroup.append($id_in)
 
-  newLine.appendChild(del_but);
+  var $tok_in = $("<input type='text' name='token_input' class='form-control' value='" + tok + "'>")
+  $formGroup.append($tok_in)
+
+  var $serv_in = $("<input type='text' name='server_input' class='form-control' value='" + ser + "'>")
+  $formGroup.append($serv_in)
+
+  var $del_but = ("<button id='remove' class='btn btn-default'><span class='glyphicon glyphicon-minus'></span> Delete</button>")
+  $formInline.append($del_but)
 
   $('div[id=server_info]').append(newLine);
   $('button[id=remove]').on('click',remove_field);

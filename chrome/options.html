@@ -1,17 +1,60 @@
+<!-- jane did this -->
 <html>
 <head><title>Curriculum settings</title></head>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<style>
+</style>
 <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Curriculum</a>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Welcome!</h1>
+            <p>Curriculum is a tool for small, creative groups - about 4 to 8 people is the best size. It works by accumulating fragments of your group's HTTP browsing (Wikipedia, Stack Overflow, etc) and making them into a stream that only your group can see.</p>
+            <ul>
+                <li>It's a group feed. No one person can be traced back to any particular term you see.</li>
+                <li>It's HTTP-only, no HTTPS. That means it doesn't look at Facebook, Twitter, banking sites, most shopping sites, etc.</li>
+                <li>It's ephemeral&mdash;everything is permanently deleted after 28 days. Curriculum is about a stream of ideas you and your colleagues are encountering, it's not designed for any kind of analysis.</li>
+                <li>It's open-source. You can read every line of the <a href="https://github.com/AKAMEDIASYSTEM/curriculum-docker">code</a> and make sure it's doing what you want.</li>
+            </ul>
+        </div>
+    </div>
 
-Enter your group's credentials:
-<div id="server_info">
-    
-</div>
-<button class="add_field_button" id="add">Add another server</button>
-<div id="status"></div>
-<button id="save">Save</button>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+            <h1>Get started and add a server</h1>
+            <p>Your server will have given you a <b>groupID</b>, <b>token</b>, and <b>server</b> address</p>
+
+                <p>Enter your group's credentials:</p>
+                <div id="server_info">
+
+                </div>
+
+                <button class="btn btn-primary" id="save">
+                    <span class="glyphicon glyphicon-save"></span> Save
+                </button>
+
+                <button class="add_field_button btn btn-default" id="add">
+                    <span class="glyphicon glyphicon-plus"></span> Add another server
+                </button>
+
+                <div id="status">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </body>
 <script src="js/jquery.js"></script>
 <script src="js/options.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 </html>
