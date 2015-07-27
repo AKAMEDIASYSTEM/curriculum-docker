@@ -66,7 +66,6 @@ while True:
                         )
                 except Exception as e:
                     print 'mongo upsert error!', e
-                    job.delete()
                     continue
     else:
         'we failed the mimetype test, we think mimetype is ', url.mimetype
