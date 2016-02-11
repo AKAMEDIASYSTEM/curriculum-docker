@@ -1,6 +1,6 @@
 #self-contained curriculum
 
-ec2-based __dockerized__ curriculum server test
+ec2-based __dockerized__ curriculum server
 
 ### Stack:
 
