@@ -5,12 +5,6 @@
 First turn everything off:
 ```
 docker stop akaserver akaworker akabeanstalk akamongo
-docker rm akaserver akaworker akabeanstalk akamongo
-docker rmi mongo akaserver
-sudo rm -r /var/lib/mongodb/
-cd /curriculum-docker/server
-(edit groups.py to add new groups and tokens)
-docker build -t akaserver .
 ```
 
 Then turn everything on again **in this order:**
